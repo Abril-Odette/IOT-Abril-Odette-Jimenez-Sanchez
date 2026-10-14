@@ -1,35 +1,222 @@
-<html>
-    <head>
-        <title>My Website</title>
-        <meta charset="UTF-8"> <!-- specifies the character encoding for the HTML document -->  
-        <meta lang = "en"> <!-- specifies the language of the document -->
-    </head>
-    <body> <!-- contains the content that is displayed on the web page -->
-        <h1>505 site</h1>
-        <h3>This is my 505 place, welcomeee</h3>
-        <br>
-        <h1>LABORATORIOS: </h1>
-        <p>Abril Odette | <a href="Labs/Lab%2001/Artist%20Fan%20Project/index.html">Labs/LAB 01/Artist Fan Page</a> |</p>
-        <br>
-        <p>Where we love The Strokes and Enjambre too</p>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa dolorum molestias debitis totam, odio, mollitia temporibus pariatur est laborum maxime quos explicabo ab architecto voluptatibus odit. Inventore aliquid explicabo distinctio.</p>
-        <img src = "image1.png" width = "1300" height = "700" align = "center" alt = "Image 1"> <!---Image-->
-        <h3>Here you can see a image of The Strokes:</h3>
-        <img src = "thestrokes.jpg" width = "700" height = "1000" alt = "Image 2" align = "center">
-        <p>I wish I could go to their concert this november. Pary 4 me please.</p>
-        <h3>We can also see some gift of AM:/h3>
-        <img src = "gif1.gif" width = "1300" height = "700" align = "center" alt = "Image "3s align = "center">
-        <h3>Or a video of Enjambre:</h3>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/W3zbkhMVSU4?si=LrYxYEwOcxKzU7Ur" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen width = "1300" height = "700" align = "center"></iframe>
-        <!---<iframe></iframe> //It is for adding a video for its html direction-->
-        <br>
-        <br>
-        <h4>This is the site of my school:</h4>
-        <a href = "http://www.tec.mx" target = "_blank">Tec </a> <!---Hiperlink-->
-        <br>
-        <br>
-        <h4>Contact me on WhatsApp:</h4>
-        <a href = "https://wa.me/4428245902?text=Holi"><img src = "walogo.webp" width = "100" height = "100" alt = "WhatsApp"> </a>
-        </body>
+```html
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abril Odette | My Website</title>
+</head>
+
+<body style="margin: 0; font-family: 'Segoe UI', Arial, sans-serif; background-color: #fff6fa; color: #493443;">
+
+    <!-- Encabezado -->
+    <header style="background-color: #f0d6e3; padding: 45px 20px; text-align: center; border-bottom: 1px solid #e4bfd1;">
+
+        <p style="font-size: 13px; letter-spacing: 4px; color: #a15379; text-transform: uppercase; margin-bottom: 12px;">
+            Welcome to my website
+        </p>
+
+        <h1 style="font-size: 38px; font-weight: 500; margin: 0; color: #613b52;">
+            Abril Odette Jiménez Sánchez
+        </h1>
+
+        <p style="font-size: 17px; color: #805d72; margin-top: 15px;">
+            My little corner of the internet.
+        </p>
+
+    </header>
+
+    <!-- Menú de navegación -->
+    <nav style="background-color: #fffdfd; padding: 20px 10px; text-align: center; border-bottom: 1px solid #eedce5;">
+
+        <a href="index.html" style="text-decoration: none; color: #a15379; font-weight: bold; margin: 0 15px; font-size: 14px;">
+            ABRIL ODETTE
+        </a>
+
+        <span style="color: #d7b5c6;">|</span>
+
+        <a href="#labs" style="text-decoration: none; color: #613b52; margin: 0 15px; font-size: 14px;">
+            LABS
+        </a>
+
+        <span style="color: #d7b5c6;">|</span>
+
+        <a href="#projects" style="text-decoration: none; color: #613b52; margin: 0 15px; font-size: 14px;">
+            PROJECT DELIVERABLES
+        </a>
+
+    </nav>
+
+    <!-- Contenido principal -->
+    <main style="max-width: 1050px; margin: 0 auto; padding: 35px 22px;">
+
+        <!-- Presentación personal -->
+        <section style="padding: 25px 0 40px;">
+
+            <p style="font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: #b16b8c;">
+                A little introduction
+            </p>
+
+            <h2 style="font-size: 29px; font-weight: 500; color: #613b52;">
+                505 site — Welcomeee!
+            </h2>
+
+            <p style="font-size: 16px; line-height: 1.9; color: #765e6c;">
+                Welcome to my 505 place, a space where I can share some of my interests, music, and academic projects.
+                Here we love The Strokes and Enjambre too. This website is a small collection of things I enjoy and
+                things I am learning to create.
+            </p>
+
+        </section>
+
+        <!-- Laboratorios -->
+        <section id="labs" style="margin-bottom: 55px; scroll-margin-top: 25px;">
+
+            <div style="border-left: 4px solid #c8799d; padding-left: 18px; margin-bottom: 25px;">
+
+                <p style="font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: #b16b8c; margin: 0 0 8px;">
+                    Academic portfolio
+                </p>
+
+                <h2 style="font-size: 30px; font-weight: 500; margin: 0; color: #613b52;">
+                    My Labs
+                </h2>
+
+            </div>
+
+            <p style="font-size: 16px; line-height: 1.8; color: #765e6c; margin-bottom: 25px;">
+                Here you can explore the labs I have developed throughout the course.
+                Select a project to visit its webpage.
+            </p>
+
+            <!-- Lab 01 -->
+            <article style="background-color: #ffffff; border: 1px solid #edd5e0; border-radius: 14px; padding: 26px; box-shadow: 0 5px 18px rgba(126, 70, 98, 0.06);">
+
+                <p style="font-size: 12px; letter-spacing: 2px; color: #b16b8c; margin-top: 0;">
+                    LABORATORY 01
+                </p>
+
+                <h3 style="font-size: 23px; color: #613b52; margin-bottom: 12px;">
+                    Artist Fan Page
+                </h3>
+
+                <p style="font-size: 15px; line-height: 1.8; color: #765e6c;">
+                    A webpage dedicated to an artist, created using HTML5 and inline CSS.
+                    This project explores webpage structure, images, hyperlinks, and visual design.
+                </p>
+
+                <a href="Labs/Lab%2001/Artist%20Fan%20Project/index.html"
+                   style="display: inline-block; margin-top: 12px; padding: 13px 23px; background-color: #a6537c; color: white; text-decoration: none; border-radius: 7px; font-size: 14px; font-weight: bold;">
+                    Visit Lab 01 →
+                </a>
+
+            </article>
+
+            <p style="font-size: 13px; color: #9c7b8d; font-style: italic; margin-top: 20px;">
+                More labs coming soon...
+            </p>
+
+        </section>
+
+        <!-- Project Deliverables -->
+        <section id="projects" style="background-color: #f3e2eb; padding: 30px; border-radius: 14px; margin-bottom: 50px; scroll-margin-top: 25px;">
+
+            <p style="font-size: 12px; letter-spacing: 3px; color: #a15379; text-transform: uppercase; margin-top: 0;">
+                Coursework
+            </p>
+
+            <h2 style="font-size: 27px; font-weight: 500; color: #613b52;">
+                Project Deliverables
+            </h2>
+
+            <p style="font-size: 15px; line-height: 1.8; color: #765e6c;">
+                This section will bring together the deliverables and larger projects I develop
+                during the course. I will update it as new projects are completed.
+            </p>
+
+        </section>
+
+        <!-- Música y contenido personal -->
+        <section style="margin-bottom: 55px;">
+
+            <div style="border-left: 4px solid #c8799d; padding-left: 18px; margin-bottom: 25px;">
+
+                <h2 style="font-size: 27px; font-weight: 500; color: #613b52; margin: 0;">
+                    A little bit of music
+                </h2>
+
+            </div>
+
+            <h3 style="color: #80506a;">The Strokes</h3>
+
+            <img src="thestrokes.jpg"
+                 style="display: block; width: 100%; max-width: 700px; height: auto; border-radius: 12px; margin: 15px auto;"
+                 alt="The Strokes">
+
+            <p style="font-size: 15px; line-height: 1.8; color: #765e6c;">
+                I wish I could go to their concert this November. Party 4 me please.
+            </p>
+
+            <h3 style="color: #80506a; margin-top: 35px;">Arctic Monkeys</h3>
+
+            <img src="gif1.gif"
+                 style="display: block; width: 100%; max-width: 700px; height: auto; border-radius: 12px; margin: 15px auto;"
+                 alt="Arctic Monkeys GIF">
+
+            <h3 style="color: #80506a; margin-top: 35px;">Enjambre</h3>
+
+            <div style="position: relative; width: 100%; max-width: 700px; margin: 15px auto;">
+                <iframe
+                    src="https://www.youtube.com/embed/W3zbkhMVSU4"
+                    title="Enjambre music video"
+                    style="display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 12px;"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+        </section>
+
+        <!-- Enlaces externos -->
+        <section style="background-color: #ffffff; border: 1px solid #edd5e0; border-radius: 14px; padding: 25px; margin-bottom: 40px;">
+
+            <h2 style="font-size: 23px; font-weight: 500; color: #613b52;">
+                Find me around the web
+            </h2>
+
+            <p style="font-size: 15px; color: #765e6c;">
+                My school:
+                <a href="https://www.tec.mx" target="_blank" rel="noopener noreferrer" style="color: #a6537c;">
+                    Tecnológico de Monterrey
+                </a>
+            </p>
+
+            <p style="font-size: 15px; color: #765e6c;">
+                Contact me on WhatsApp:
+                <a href="https://wa.me/4428245902?text=Holi" target="_blank" rel="noopener noreferrer" style="color: #a6537c;">
+                    Say hello!
+                </a>
+            </p>
+
+        </section>
+
+    </main>
+
+    <!-- Pie de página -->
+    <footer style="background-color: #613b52; color: #fff1f7; padding: 27px 20px; text-align: center;">
+
+        <p style="font-size: 14px; margin: 0 0 8px;">
+            Abril Odette Jiménez Sánchez
+        </p>
+
+        <p style="font-size: 12px; color: #e5c8d7; margin: 0;">
+            505 site · GitHub Pages
+        </p>
+
+    </footer>
+
+</body>
 </html>
+```
