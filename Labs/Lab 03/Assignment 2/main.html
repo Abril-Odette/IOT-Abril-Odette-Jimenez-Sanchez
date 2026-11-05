@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redesigning a Digital Experience | Lab 03</title>
+
+    <!-- Small style block only for the phone mockups (they repeat many times). The rest of the page uses inline CSS like Labs 01 and 02. -->
+    <style>
+        .ph{position:relative;width:250px;height:510px;background:#000;border:6px solid #222;border-radius:30px;overflow:hidden;color:#fff;font:12px 'Segoe UI',Arial,sans-serif;flex:none;text-align:left;user-select:none}
+        .hd{display:flex;align-items:center;gap:12px;padding:14px 14px 10px}
+        .hd b{flex:1;font-size:14px}
+        .hd span{font-size:16px;color:#ddd;cursor:pointer}
+        .rw{display:flex;align-items:center;gap:10px;padding:7px 14px;cursor:pointer}
+        .rw.on{background:#0f2f2d}
+        .rw i{width:38px;height:38px;border-radius:3px;flex:none}
+        .rw p{margin:0;flex:1;min-width:0}
+        .rw b{display:block;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .rw small{color:#9a9a9a;font-size:10px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .rw em{color:#777;font-style:normal;font-size:16px}
+        .ck{width:18px;height:18px;border:2px solid #777;border-radius:50%;text-align:center;line-height:18px;font-size:11px;color:#000;flex:none;box-sizing:border-box}
+        .rw.on .ck{background:#24e0cf;border-color:#24e0cf}
+        .bar{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 16px;background:linear-gradient(transparent,#000 45%)}
+        .bar button,.cta{width:100%;border:0;border-radius:24px;background:#24e0cf;color:#000;font-weight:bold;font-size:13px;padding:12px;cursor:pointer}
+        .cta.off{opacity:.35;cursor:default}
+        .sh{position:absolute;left:0;right:0;top:0;bottom:0;background:rgba(0,0,0,.62)}
+        .sd{position:absolute;left:0;right:0;bottom:0;background:#1a1a1a;border-radius:18px 18px 0 0;padding:10px 14px 16px}
+        .sd .hl{width:36px;height:4px;background:#555;border-radius:2px;margin:0 auto 10px}
+        .sd h4{margin:0 0 8px;font-size:13px}
+        .se{background:#2a2a2a;border-radius:8px;padding:8px 10px;color:#888;margin-bottom:6px}
+        .lb{color:#888;font-size:10px;letter-spacing:1px;margin:8px 0 2px}
+        .pl{display:flex;align-items:center;gap:10px;padding:6px 0;cursor:pointer}
+        .pl.on{color:#24e0cf}
+        .pl i{width:32px;height:32px;border-radius:3px;flex:none}
+        .pl small{display:block;color:#888;font-size:10px}
+        .rd{margin-left:auto;width:16px;height:16px;border:2px solid #666;border-radius:50%;flex:none;box-sizing:border-box}
+        .pl.on .rd{background:#24e0cf;border-color:#24e0cf}
+        .toast{position:absolute;left:10px;right:10px;bottom:14px;background:#2b2b2b;border-radius:10px;padding:11px 12px;display:flex;align-items:center;justify-content:space-between;font-size:12px}
+        .toast a{color:#24e0cf;font-weight:bold;cursor:pointer}
+        .static{pointer-events:none}
+        .fr{display:flex;flex-wrap:wrap;gap:22px;justify-content:center;margin:20px 0}
+        .fr figure{margin:0;text-align:center;max-width:262px;font-size:13px;line-height:1.5}
+        .fr figcaption{margin-top:10px}
+        @media print{.noprint{display:none}}
+    </style>
+</head>
+
+<body id="top" style="margin: 0; background-color: #ffffff; color: #1b2a38; font-family: 'Segoe UI', Arial, sans-serif;">
+
+    <!-- Top information bar -->
+    <div style="background-color: #0b2c4a; color: white; padding: 14px 30px;">
+        <table width="100%">
+            <tr>
+                <td valign="middle" style="color: white; font-size: 14px; line-height: 1.6;">
+                    ITESM Campus Querétaro<br>
+                    TC1004B - Implementation of the Internet of Things<br>
+                    Abril Odette Jiménez Sánchez | A01715095
+                </td>
+                <td valign="middle" align="right" style="font-size: 14px;">
+                    <a href="../../../index.html" style="color: #7fe3ef; font-weight: bold; text-decoration: none;">
+                        ← BACK TO MAIN PAGE
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Cover -->
+    <div style="background-color: #06203a; background-image: linear-gradient(135deg, #0b2c4a 0%, #06203a 70%); color: white; padding: 50px 40px;">
+        <table width="100%" style="max-width: 1000px; margin: 0 auto;">
+            <tr>
+                <td valign="middle" style="padding-right: 30px;">
+                    <p style="font-size: 14px; letter-spacing: 4px; color: #7fe3ef; margin: 0 0 12px;">LAB 03 · VISUAL DESIGN + UX/UI</p>
+                    <h1 style="font-size: 60px; font-weight: bold; margin: 0 0 12px; line-height: 1.05;">Redesigning a Digital Experience</h1>
+                    <hr width="420" align="left" size="4" color="#24e0cf">
+                    <p style="font-size: 20px; font-weight: bold; margin-top: 14px;">Tidal · Adding several songs to a playlist</p>
+                    <p style="font-size: 15px; color: #cfeff5; max-width: 460px; line-height: 1.7;">
+                        Four taps per song, over and over. This report documents that experience, compares it with
+                        Spotify and proposes a multi-select flow you can try below.
+                    </p>
+                    <p><a href="#prototype" style="color: #06203a; background-color: #24e0cf; padding: 11px 20px; border-radius: 6px; font-weight: bold; text-decoration: none; font-size: 14px;">Try the prototype ↓</a></p>
+                </td>
+                <td valign="middle" align="center" width="290" class="noprint">
+                    <div class="ph static" data-f="select:0,2,3:"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div style="max-width: 1000px; margin: 0 auto; padding: 0 22px;">
+
+        <!-- 1. SELECTED APPLICATION -->
+        <div style="background-color: #0b2c4a; padding: 14px 24px; margin-top: 35px;">
+            <h2 style="margin: 0; font-size: 34px; color: white;">1. Selected application</h2>
+        </div>
+
+        <div align="center" style="margin-top: 22px;">
+            <table style="border-collapse: collapse; width: 100%; max-width: 820px; font-size: 15px;">
+                <tr>
+                    <td style="background-color: #0b2c4a; color: white; font-weight: bold; padding: 10px 14px; border: 1px solid #0b2c4a; width: 28%;">App</td>
+                    <td style="padding: 10px 14px; border: 1px solid #b9c9d9;">Tidal, the music streaming service (mobile version).</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #0b2c4a; color: white; font-weight: bold; padding: 10px 14px; border: 1px solid #0b2c4a;">Selected feature</td>
+                    <td style="padding: 10px 14px; border: 1px solid #b9c9d9;">Adding songs to a playlist.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #0b2c4a; color: white; font-weight: bold; padding: 10px 14px; border: 1px solid #0b2c4a;">The task</td>
+                    <td style="padding: 10px 14px; border: 1px solid #b9c9d9;">I have a list of songs in my collection and I want to put several of them into a new playlist.</td>
+                </tr>
+            </table>
+        </div>
+
+        <p style="font-size: 16px; line-height: 1.8; margin-top: 22px;">
+            I use Tidal on my phone every day, and building a playlist is one of the things I do the most. It is also
+            where the app frustrates me the most: it only lets me add songs one at a time.
+        </p>
+
+        <!-- 2. CURRENT USER FLOW -->
+        <div style="background-color: #0b2c4a; padding: 14px 24px; margin-top: 40px;">
+            <h2 style="margin: 0; font-size: 34px; color: white;">2. Current user flow</h2>
+        </div>
+
+        <p style="font-size: 16px; line-height: 1.8; margin-top: 22px;">
+            Songs → three dots → Add to playlist → find the playlist → select it → <b>start again with the next song.</b>
+            The app’s labels are in Spanish because my phone is.
+        </p>
+
+        <div class="fr">
+            <figure>
+                <img src="images/recurso1.png" alt="Tidal song list with a three-dot button on every row" style="width: 100%; border-radius: 8px;">
+                <figcaption><b>Step 1.</b> In my collection I tap the three dots of one song.</figcaption>
+            </figure>
+            <figure>
+                <img src="images/recurso2.png" alt="Tidal song menu with the option Añadir a playlist" style="width: 100%; border-radius: 8px;">
+                <figcaption><b>Step 2.</b> In the menu I look for “Añadir a playlist”.</figcaption>
+            </figure>
+            <figure>
+                <img src="images/recurso3.png" alt="Tidal Selecciona playlist screen with a long list of playlists" style="width: 100%; border-radius: 8px;">
+                <figcaption><b>Steps 3 and 4.</b> I search for my playlist in a long list and tap it. Then I go back to step 1 for the next song.</figcaption>
+            </figure>
+        </div>
+
+        <div align="center">
+            <table style="border-collapse: collapse; width: 100%; max-width: 760px; font-size: 15px; text-align: center;">
+                <tr style="background-color: #0b2c4a; color: white;">
+                    <td style="padding: 9px; border: 1px solid #0b2c4a;">Songs to add</td>
+                    <td style="padding: 9px; border: 1px solid #0b2c4a;">1</td>
+                    <td style="padding: 9px; border: 1px solid #0b2c4a;">5</td>
+                    <td style="padding: 9px; border: 1px solid #0b2c4a;">10</td>
+                    <td style="padding: 9px; border: 1px solid #0b2c4a;">20</td>
+                </tr>
+                <tr>
+                    <td style="padding: 9px; border: 1px solid #b9c9d9; font-weight: bold;">Taps in Tidal today (4 per song)</td>
+                    <td style="padding: 9px; border: 1px solid #b9c9d9;">4</td>
+                    <td style="padding: 9px; border: 1px solid #b9c9d9;">20</td>
+                    <td style="padding: 9px; border: 1px solid #b9c9d9;">40</td>
+                    <td style="padding: 9px; border: 1px solid #b9c9d9;">80</td>
+                </tr>
+            </table>
+        </div>
+
+        <p style="font-size: 16px; line-height: 1.8; margin-top: 22px;">
+            In Tidal there is no other method for adding songs. This is how Spotify handles the same task, with two
+            different routes:
+        </p>
+
+        <h3 style="color: #0b2c4a; text-align: center; margin-top: 30px;">Reference: Spotify, Method 1 (from a song)</h3>
+        <div class="fr">
+            <figure>
+                <img src="images/recurso4.png" alt="Spotify liked songs list" style="width: 100%; border-radius: 8px;">
+                <figcaption>Three dots of a song.</figcaption>
+            </figure>
+            <figure>
+                <img src="images/recurso5.png" alt="Spotify song menu with Agregar a playlist" style="width: 100%; border-radius: 8px;">
+                <figcaption>“Agregar a playlist”.</figcaption>
+            </figure>
+            <figure>
+                <img src="images/recurso6.png" alt="Spotify Saved in sheet with several playlists checked" style="width: 100%; border-radius: 8px;">
+                <figcaption>Tick <b>all</b> the playlists I want, or untick to remove.</figcaption>
+            </figure>
+            <figure>
+                <img src="images/recurso7.png" alt="Spotify Saved in sheet with the Done button" style="width: 100%; border-radius: 8px;">
+                <figcaption>Tap “Done”.</figcaption>
+            </figure>
+        </div>
+
+        <h3 style="color: #0b2c4a; text-align: center; margin-top: 30px;">Reference: Spotify, Method 2 (from the playlist)</h3>
+        <div class="fr">
+            <figure>
+                <img src="images/recurso8.png" alt="Spotify playlist with an Agregar button" style="width: 100%; border-radius: 8px;">
+                <figcaption>Inside the playlist I tap “Agregar”.</figcaption>
+            </figure>
+            <figure>
+                <img src="images/recurso9.png" alt="Spotify Agregar a esta playlist screen with plus buttons" style="width: 100%; border-radius: 8px;">
+                <figcaption>I find and add <b>all</b> the songs I want to this one playlist.</figcaption>
+            </figure>
+        </div>
+
+        <!-- 3. UX ANALYSIS -->
+        <div style="background-color: #0b2c4a; padding: 14px 24px; margin-top: 40px;">
+            <h2 style="margin: 0; font-size: 34px; color: white;">3. UX analysis</h2>
+        </div>
+
+        <div align="center" style="margin-top: 22px;">
+            <table style="border-collapse: collapse; width: 100%; font-size: 15px; line-height: 1.6;">
+                <tr>
+                    <td style="background-color: #0b2c4a; color: white; font-weight: bold; padding: 10px 14px; border: 1px solid #0b2c4a; width: 27%;">How many steps?</td>
+                    <td style="padding: 10px 14px; border: 1px solid #b9c9d9;">Four per song, with no way to batch them. Five songs cost 20 taps and ten songs cost 40.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #0b2c4a; color: white; font-weight: bold; padding: 10px 14px; border: 1px solid #0b2c4a;">Is the navigation clear?</td>
+                    <td style="padding: 10px 14px; border: 1px solid #b9c9d9;">Each screen is understandable by itself, but the feature is only reachable through the one-song menu. There is no alternative route, such as adding from inside a playlist as in Spotify’s Method 2.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #0b2c4a; color: white; font-weight: bold; padding: 10px 14px; border: 1px solid #0b2c4a;">Is the feature easy to find?</td>
+                    <td style="padding: 10px 14px; border: 1px solid #b9c9d9;">Not really. “Añadir a playlist” is the fourth item in a menu of nine, with the same visual weight as “Credits” or “Go to album”, even though building playlists is a very frequent action.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #0b2c4a; color: white; font-weight: bold; padding: 10px 14px; border: 1px solid #0b2c4a;">Are the buttons easy to identify?</td>
+                    <td style="padding: 10px 14px; border: 1px solid #b9c9d9;">The three dots are small, gray and stuck to the right edge, and every row has one, so there is nothing that hints at “select several”. The menu also mixes languages: “Save for Later” appears among Spanish labels.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #0b2c4a; color: white; font-weight: bold; padding: 10px 14px; border: 1px solid #0b2c4a;">Is the information well organized?</td>
+                    <td style="padding: 10px 14px; border: 1px solid #b9c9d9;">The playlist picker shows cover, name, number of songs and duration, but its order is not alphabetical and nothing explains it. Spotify’s “Saved in” sheet, in contrast, shows with check marks where a song already lives.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #0b2c4a; color: white; font-weight: bold; padding: 10px 14px; border: 1px solid #0b2c4a;">Confusing moments</td>
+                    <td style="padding: 10px 14px; border: 1px solid #b9c9d9;">Having to search for the same playlist again and again, and losing track of which songs I have already moved.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #0b2c4a; color: white; font-weight: bold; padding: 10px 14px; border: 1px solid #0b2c4a;">What would I change?</td>
+                    <td style="padding: 10px 14px; border: 1px solid #b9c9d9;">Let me choose the songs <b>first</b> and the playlist <b>once</b>.</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- 4. DESIGN PROPOSAL -->
+        <div style="background-color: #0b2c4a; padding: 14px 24px; margin-top: 40px;">
+            <h2 style="margin: 0; font-size: 34px; color: white;">4. Design proposal</h2>
+        </div>
+
+        <p style="font-size: 16px; line-height: 1.8; margin-top: 22px;">
+            I kept Tidal’s dark look and its cyan accent so the proposal feels like the same app, and I changed how the
+            task works: a <b>selection mode</b> for the song list, a <b>bottom action bar</b> and a <b>single playlist sheet</b>.
+        </p>
+
+        <div class="fr">
+            <figure>
+                <div class="ph static" data-f="select:0,2,3:"></div>
+                <figcaption><b>A. Selection mode.</b> Checkboxes replace the three dots, the header counts the songs and the cyan bar offers the next action.</figcaption>
+            </figure>
+            <figure>
+                <div class="ph static" data-f="sheet:0,2,3:0"></div>
+                <figcaption><b>B. One playlist sheet.</b> “New playlist” comes first, recent playlists follow and the button says exactly what will happen.</figcaption>
+            </figure>
+            <figure>
+                <div class="ph static" data-f="done:0,2,3:0"></div>
+                <figcaption><b>C. Feedback.</b> A message confirms the result and offers “Undo”.</figcaption>
+            </figure>
+        </div>
+
+        <div align="center">
+            <table style="border-collapse: collapse; width: 100%; font-size: 15px; line-height: 1.6;">
+                <tr style="background-color: #0b2c4a; color: white;">
+                    <td style="padding: 9px 14px; border: 1px solid #0b2c4a; width: 24%;">Element</td>
+                    <td style="padding: 9px 14px; border: 1px solid #0b2c4a; width: 38%;">Today</td>
+                    <td style="padding: 9px 14px; border: 1px solid #0b2c4a;">Proposal</td>
+                </tr>
+                <tr>
+                    <td style="padding: 9px 14px; border: 1px solid #b9c9d9; font-weight: bold;">Entry point</td>
+                    <td style="padding: 9px 14px; border: 1px solid #b9c9d9;">Three dots, then a nine-item menu.</td>
+                    <td style="padding: 9px 14px; border: 1px solid #b9c9d9;">Press and hold a song (or tap the ☑ icon in the header) to start selecting.</td>
+                </tr>
+                <tr>
+                    <td style="padding: 9px 14px; border: 1px solid #b9c9d9; font-weight: bold;">Selection</td>
+                    <td style="padding: 9px 14px; border: 1px solid #b9c9d9;">One song at a time.</td>
+                    <td style="padding: 9px 14px; border: 1px solid #b9c9d9;">Round checkboxes, a tinted row and a “3 selected” counter, plus “All”.</td>
+                </tr>
+                <tr>
+                    <td style="padding: 9px 14px; border: 1px solid #b9c9d9; font-weight: bold;">Main action</td>
+                    <td style="padding: 9px 14px; border: 1px solid #b9c9d9;">Buried in the menu.</td>
+                    <td style="padding: 9px 14px; border: 1px solid #b9c9d9;">A full-width cyan button at the bottom of the screen, where the thumb already is.</td>
+                </tr>
+                <tr>
+                    <td style="padding: 9px 14px; border: 1px solid #b9c9d9; font-weight: bold;">Playlist picker</td>
+                    <td style="padding: 9px 14px; border: 1px solid #b9c9d9;">Full-screen list, unexplained order.</td>
+                    <td style="padding: 9px 14px; border: 1px solid #b9c9d9;">Bottom sheet with search, “New playlist” on top and a “Recent” label.</td>
+                </tr>
+                <tr>
+                    <td style="padding: 9px 14px; border: 1px solid #b9c9d9; font-weight: bold;">Confirmation</td>
+                    <td style="padding: 9px 14px; border: 1px solid #b9c9d9;">None needed, because only one song moves.</td>
+                    <td style="padding: 9px 14px; border: 1px solid #b9c9d9;">A button with the exact count and name (“Add 3 songs to POST”) and a toast with “Undo”.</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- 5. PROPOSED USER FLOW -->
+        <div style="background-color: #0b2c4a; padding: 14px 24px; margin-top: 40px;" id="prototype">
+            <h2 style="margin: 0; font-size: 34px; color: white;">5. Proposed user flow</h2>
+        </div>
+
+        <p style="font-size: 16px; line-height: 1.8; margin-top: 22px;">
+            Press and hold a song → tap more songs → Add to playlist → choose the playlist → confirm.
+        </p>
+
+        <div class="fr">
+            <figure>
+                <div class="ph static" data-f="list::"></div>
+                <figcaption><b>1.</b> Press and hold a song.</figcaption>
+            </figure>
+            <figure>
+                <div class="ph static" data-f="select:2:"></div>
+                <figcaption><b>2.</b> Selection mode starts with that song checked.</figcaption>
+            </figure>
+            <figure>
+                <div class="ph static" data-f="select:2,3,5:"></div>
+                <figcaption><b>3.</b> Tap the other songs.</figcaption>
+            </figure>
+            <figure>
+                <div class="ph static" data-f="sheet:2,3,5:0"></div>
+                <figcaption><b>4.</b> “Add to playlist”, then choose the playlist.</figcaption>
+            </figure>
+            <figure>
+                <div class="ph static" data-f="done:2,3,5:0"></div>
+                <figcaption><b>5.</b> Confirm and see the result.</figcaption>
+            </figure>
+        </div>
+
+        <div align="center">
+            <table style="border-collapse: collapse; width: 100%; max-width: 760px; font-size: 15px; text-align: center;">
+                <tr style="background-color: #0b2c4a; color: white;">
+                    <td style="padding: 9px; border: 1px solid #0b2c4a;">Songs to add</td>
+                    <td style="padding: 9px; border: 1px solid #0b2c4a;">1</td>
+                    <td style="padding: 9px; border: 1px solid #0b2c4a;">5</td>
+                    <td style="padding: 9px; border: 1px solid #0b2c4a;">10</td>
+                    <td style="padding: 9px; border: 1px solid #0b2c4a;">20</td>
+                </tr>
+                <tr>
+                    <td style="padding: 9px; border: 1px solid #b9c9d9; font-weight: bold;">Tidal today</td>
+                    <td style="padding: 9px; border: 1px solid #b9c9d9;">4</td>
+                    <td style="padding: 9px; border: 1px solid #b9c9d9;">20</td>
+                    <td style="padding: 9px; border: 1px solid #b9c9d9;">40</td>
+                    <td style="padding: 9px; border: 1px solid #b9c9d9;">80</td>
+                </tr>
+                <tr>
+                    <td style="padding: 9px; border: 1px solid #b9c9d9; font-weight: bold;">Proposal (songs + 3)</td>
+                    <td style="padding: 9px; border: 1px solid #b9c9d9;">4</td>
+                    <td style="padding: 9px; border: 1px solid #b9c9d9;">8</td>
+                    <td style="padding: 9px; border: 1px solid #b9c9d9;">13</td>
+                    <td style="padding: 9px; border: 1px solid #b9c9d9;">23</td>
+                </tr>
+            </table>
+        </div>
+        <p style="font-size: 13px; color: #4a5d70; font-style: italic; text-align: center;">
+            The proposal needs one tap per song plus three fixed taps (Add, playlist, confirm). With a single song it costs the same as today, so nobody loses anything.
+        </p>
+
+        <h3 style="color: #0b2c4a; text-align: center; margin-top: 35px;">Try it yourself</h3>
+
+        <table width="100%" style="max-width: 760px; margin: 0 auto;">
+            <tr>
+                <td valign="top" align="center" width="290">
+                    <div class="ph" id="proto-ph"></div>
+                </td>
+                <td valign="middle" style="padding-left: 20px; font-size: 15px; line-height: 1.7;">
+                    <p id="step" style="background-color: #eaf6f8; border-left: 4px solid #24e0cf; padding: 12px 16px; margin-top: 0;"></p>
+                    <p>Actions so far: <b id="taps">0</b></p>
+                    <p id="result" style="color: #0b2c4a; font-weight: bold;"></p>
+                    <button id="reset" style="background-color: #0b2c4a; color: white; border: 0; border-radius: 6px; padding: 10px 18px; font-size: 14px; cursor: pointer;">Restart</button>
+                </td>
+            </tr>
+        </table>
+
+        <!-- 6. JUSTIFICATION -->
+        <div style="background-color: #0b2c4a; padding: 14px 24px; margin-top: 40px;">
+            <h2 style="margin: 0; font-size: 34px; color: white;">6. Justification</h2>
+        </div>
+
+        <hr size="4" color="#0b2c4a" style="margin-top: 30px;">
+        <h2 style="text-align: center; color: #0b2c4a; margin: 14px 0;">Current experience → Proposed experience</h2>
+        <hr size="4" color="#0b2c4a">
+
+        <div align="center" style="margin-top: 22px;">
+            <table style="border-collapse: collapse; width: 100%; font-size: 15px; line-height: 1.6;">
+                <tr>
+                    <td style="background-color: #0b2c4a; color: white; font-weight: bold; padding: 10px 14px; border: 1px solid #0b2c4a; width: 27%;">1. Which feature?</td>
+                    <td style="padding: 10px 14px; border: 1px solid #b9c9d9;">Adding songs to a playlist in Tidal’s mobile app.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #0b2c4a; color: white; font-weight: bold; padding: 10px 14px; border: 1px solid #0b2c4a;">2. How does it work now?</td>
+                    <td style="padding: 10px 14px; border: 1px solid #b9c9d9;">Three dots, “Añadir a playlist”, find the playlist, select it. Repeated for every song.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #0b2c4a; color: white; font-weight: bold; padding: 10px 14px; border: 1px solid #0b2c4a;">3. What problem did I find?</td>
+                    <td style="padding: 10px 14px; border: 1px solid #b9c9d9;">There is no way to add several songs at once, and the effort grows with every song. Spotify offers two alternatives and Tidal offers none.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #0b2c4a; color: white; font-weight: bold; padding: 10px 14px; border: 1px solid #0b2c4a;">4. What did I change?</td>
+                    <td style="padding: 10px 14px; border: 1px solid #b9c9d9;">A selection mode, a bottom action bar, one playlist sheet with a clear confirm button and an “Undo” message.</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #0b2c4a; color: white; font-weight: bold; padding: 10px 14px; border: 1px solid #0b2c4a;">5. Why is it better?</td>
+                    <td style="padding: 10px 14px; border: 1px solid #b9c9d9;">Adding 10 songs drops from 40 taps to 13, and the playlist is chosen once instead of ten times.</td>
+                </tr>
+            </table>
+        </div>
+
+        <h3 style="color: #0b2c4a; text-align: center; margin-top: 30px;">Design decisions</h3>
+
+        <p style="font-size: 16px; line-height: 1.8;">
+            <b>Choose first, decide once.</b> Selecting the songs before the destination is the same mental model as
+            email or photo galleries, so there is nothing new to learn. It fixes the repetition, which is the core of the problem.
+        </p>
+        <p style="font-size: 16px; line-height: 1.8;">
+            <b>Action where the thumb is.</b> The main button sits at the bottom, full width, in the one saturated colour
+            on a dark screen. It is the strongest element in the hierarchy as soon as there is something to act on.
+        </p>
+        <p style="font-size: 16px; line-height: 1.8;">
+            <b>Always show the state.</b> The “3 selected” counter, the check marks and the tinted rows tell me what will
+            be affected, and the button text repeats the count and the playlist name so I do not have to remember anything.
+        </p>
+        <p style="font-size: 16px; line-height: 1.8;">
+            <b>Fewer decisions in the picker.</b> “New playlist” is on top because that is exactly my task, and recent
+            playlists come before the rest, so I rarely need to search.
+        </p>
+        <p style="font-size: 16px; line-height: 1.8;">
+            <b>Mistakes are cheap.</b> A bulk action can go wrong, so the confirmation message includes “Undo”.
+        </p>
+        <p style="font-size: 16px; line-height: 1.8;">
+            <b>Consistency.</b> Same black background, white type, cyan accent, rounded buttons and cover thumbnails as
+            Tidal today. Only the interaction model changes.
+        </p>
+        <p style="font-size: 16px; line-height: 1.8;">
+            <b>What I would explore next.</b> Spotify’s “Saved in” check marks (to see where a song already lives) and an
+            “Add songs” button inside each playlist (Spotify’s Method 2). I left them out to keep this proposal focused on one clear experience.
+        </p>
+
+        <!-- Contact -->
+        <div style="border-top: 4px solid #0b2c4a; margin-top: 40px; padding-top: 22px;">
+
+            <p style="font-size: 15px;">
+                My school:
+                <a href="https://www.tec.mx" target="_blank" rel="noopener noreferrer" style="color: #1f6fb2;">
+                    Tecnológico de Monterrey
+                </a>
+            </p>
+
+            <p style="font-size: 15px;">
+                Contact me on WhatsApp:
+                <a href="https://wa.me/4428245902?text=Holi" target="_blank" rel="noopener noreferrer" style="color: #1f6fb2;">
+                    Say hello!
+                </a>
+            </p>
+
+            <p style="font-size: 15px;">
+                Send me an email:
+                <a href="mailto:A01715095@tec.mx" style="color: #1f6fb2;">
+                    A01715095@tec.mx
+                </a>
+            </p>
+
+            <p style="font-size: 15px; margin-bottom: 0;">
+                <a href="../../../index.html" style="color: #1f6fb2; font-weight: bold;">← Back to my main page</a>
+            </p>
+
+        </div>
+
+        <center style="margin: 25px 0 40px;">
+            <a href="#top" style="color: #1f6fb2; font-size: 14px;">GO TO TOP</a>
+        </center>
+
+    </div>
+
+    <!-- Footer -->
+    <footer style="background-color: #0b2c4a; color: white; padding: 24px 20px; text-align: center;">
+        <p style="font-size: 14px; margin: 0 0 8px;">Abril Odette Jiménez Sánchez</p>
+        <p style="font-size: 12px; color: #b8d3e6; margin: 0;">Lab 03 · TC1004B · Implementation of the Internet of Things</p>
+    </footer>
+
+    <script>
+        // Demo data for the mockups
+        var SONGS = [
+            ["Kiss Goodnight", "I DONT KNOW HOW BUT THEY FOUND ME"],
+            ["Ständchen", "Franz Schubert, Budapest Strings"],
+            ["Coffee", "Chappell Roan"],
+            ["After Midnight", "Chappell Roan"],
+            ["Heldenklage, NWV 2", "Jeroen van Veen"],
+            ["When I Was Your Man", "Bruno Mars"],
+            ["Japanese Denim", "Daniel Caesar"]
+        ];
+        var PL = [["POST", "38 songs"], ["ALWAYS", "145 songs"], ["CLASSY", "137 songs"], ["VANILLA", "9 songs"]];
+
+        // Draws one phone screen. s = {mode: list | select | sheet | done, sel: [song indexes], pl: playlist index or null}
+        function phone(s) {
+            var sel = s.sel, n = sel.length, selecting = s.mode !== "list" && s.mode !== "done";
+            var h = selecting
+                ? '<div class="hd"><span data-a="cancel">✕</span><b>' + n + ' selected</b><span data-a="all">All</span></div>'
+                : '<div class="hd"><span>←</span><b>Songs</b><span data-a="selmode">☑</span><span>⌕</span></div>';
+            SONGS.forEach(function (x, i) {
+                var on = selecting && sel.indexOf(i) > -1;
+                h += '<div class="rw' + (on ? ' on' : '') + '" data-i="' + i + '"><i style="background:hsl(' + (i * 47 + 10) + ',45%,40%)"></i><p><b>' + x[0] + '</b><small>' + x[1] + '</small></p>' +
+                    (selecting ? '<span class="ck">' + (on ? '✓' : '') + '</span>' : '<em>⋮</em>') + '</div>';
+            });
+            if (s.mode === "select" && n) h += '<div class="bar"><button data-a="add">＋ Add to playlist · ' + n + '</button></div>';
+            if (s.mode === "sheet") {
+                h += '<div class="sh" data-a="close"></div><div class="sd"><div class="hl"></div><h4>Add ' + n + ' song' + (n > 1 ? 's' : '') + ' to…</h4><div class="se">⌕ Search playlists</div>' +
+                    '<div class="pl"><b style="width:32px;height:32px;border-radius:3px;background:#2a2a2a;text-align:center;line-height:32px;font-size:18px;flex:none">＋</b>New playlist</div><div class="lb">RECENT</div>';
+                PL.forEach(function (p, i) {
+                    h += '<div class="pl' + (s.pl === i ? ' on' : '') + '" data-p="' + i + '"><i style="background:hsl(' + (i * 70 + 200) + ',35%,38%)"></i><div>' + p[0] + '<small>' + p[1] + '</small></div><span class="rd"></span></div>';
+                });
+                h += '<button class="cta' + (s.pl === null ? ' off' : '') + '" data-a="go" style="margin-top:10px">' + (s.pl === null ? 'Choose a playlist' : 'Add ' + n + ' song' + (n > 1 ? 's' : '') + ' to ' + PL[s.pl][0]) + '</button></div>';
+            }
+            if (s.mode === "done") h += '<div class="toast"><span>' + n + ' song' + (n > 1 ? 's' : '') + ' added to ' + PL[s.pl][0] + '</span><a data-a="undo">Undo</a></div>';
+            return h;
+        }
+
+        // Static mockups: data-f="mode:song,song:playlist"
+        document.querySelectorAll("[data-f]").forEach(function (el) {
+            var p = el.getAttribute("data-f").split(":");
+            el.innerHTML = phone({ mode: p[0], sel: p[1] ? p[1].split(",").map(Number) : [], pl: p[2] === "" ? null : Number(p[2]) });
+        });
+
+        // Interactive prototype
+        var st, taps, timer, lastN = 0;
+        var box = document.getElementById("proto-ph");
+        var TXT = {
+            list: "1 · Press and hold a song (or tap the ☑ icon at the top) to start selecting.",
+            select: "2 · Tap more songs, then tap the cyan button at the bottom.",
+            sheet: "3 · Choose a playlist, then confirm with the button.",
+            done: "Done! You can undo it or restart."
+        };
+
+        function reset() {
+            st = { mode: "list", sel: [], pl: null };
+            taps = 0;
+            document.getElementById("result").textContent = "";
+            draw();
+        }
+
+        function draw() {
+            box.innerHTML = phone(st);
+            document.getElementById("step").textContent = TXT[st.mode];
+            document.getElementById("taps").textContent = taps;
+        }
+
+        function start(i) {
+            if (st.mode !== "list") return;
+            st.mode = "select"; st.sel = [i]; taps++; draw();
+        }
+
+        box.addEventListener("pointerdown", function (e) {
+            var r = e.target.closest(".rw");
+            if (r && st.mode === "list") timer = setTimeout(function () { start(Number(r.dataset.i)); }, 550);
+        });
+        ["pointerup", "pointerleave", "pointercancel"].forEach(function (ev) {
+            box.addEventListener(ev, function () { clearTimeout(timer); });
+        });
+        box.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+
+        box.addEventListener("click", function (e) {
+            var t = e.target, a = t.closest("[data-a]"), r = t.closest(".rw"), p = t.closest("[data-p]");
+            if (p) { st.pl = Number(p.dataset.p); taps++; return draw(); }
+            if (a) {
+                var k = a.dataset.a;
+                if (k === "selmode") { st.mode = "select"; st.sel = []; taps++; }
+                else if (k === "cancel") { st.mode = "list"; st.sel = []; taps++; }
+                else if (k === "all") { st.sel = SONGS.map(function (x, i) { return i; }); taps++; }
+                else if (k === "add") { st.mode = "sheet"; st.pl = null; taps++; }
+                else if (k === "close") { st.mode = "select"; }
+                else if (k === "go") {
+                    if (st.pl === null) return;
+                    taps++; lastN = st.sel.length; st.mode = "done";
+                    document.getElementById("result").textContent = taps + " actions for " + lastN + " song" + (lastN > 1 ? "s" : "") + ". Tidal today: 4 × " + lastN + " = " + (4 * lastN) + ".";
+                }
+                else if (k === "undo") { st = { mode: "list", sel: [], pl: null }; taps = 0; document.getElementById("result").textContent = ""; }
+                return draw();
+            }
+            if (r && st.mode === "select") {
+                var i = Number(r.dataset.i), j = st.sel.indexOf(i);
+                if (j > -1) st.sel.splice(j, 1); else st.sel.push(i);
+                taps++; draw();
+            }
+        });
+
+        document.getElementById("reset").addEventListener("click", reset);
+        reset();
+    </script>
+
+</body>
+
+</html>
