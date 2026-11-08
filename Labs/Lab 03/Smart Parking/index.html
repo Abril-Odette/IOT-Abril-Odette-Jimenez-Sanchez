@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Parking | Tec de Monterrey | Lab 03</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body id="top">
+
+    <!-- Top information bar -->
+    <div class="topbar">
+        <table width="100%">
+            <tr>
+                <td valign="middle" class="topbar-text">
+                    ITESM Campus Querétaro<br>
+                    TC1004B - Implementation of the Internet of Things<br>
+                    Abril Odette Jiménez Sánchez | A01715095
+                </td>
+                <td valign="middle" align="right">
+                    <a href="../../../index.html" class="back-link">← BACK TO MAIN PAGE</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Cover -->
+    <div class="cover">
+        <p class="cover-label">LAB 03 · IOT SIMULATION</p>
+        <h1>Smart Parking</h1>
+        <hr width="320" align="left" size="4" color="#24e0cf">
+        <p class="cover-sub">Tec de Monterrey, Campus Querétaro</p>
+        <p class="cover-text">
+            A simulated IoT system: every parking space has a virtual sensor that detects if a car is parked there.
+            The data is not real, but it updates by itself and you can click any space to change it.
+        </p>
+    </div>
+
+    <div class="page">
+
+        <!-- 1. DASHBOARD -->
+        <div class="section-bar">
+            <h2>1. Dashboard</h2>
+        </div>
+
+        <div class="cards">
+            <div class="card">
+                <p class="card-label">TOTAL SPACES</p>
+                <p class="card-number" id="total">0</p>
+            </div>
+            <div class="card">
+                <p class="card-label">OCCUPIED</p>
+                <p class="card-number red" id="occupied">0</p>
+            </div>
+            <div class="card">
+                <p class="card-label">AVAILABLE</p>
+                <p class="card-number green" id="available">0</p>
+            </div>
+            <div class="card">
+                <p class="card-label">OCCUPANCY</p>
+                <p class="card-number" id="percentage">0%</p>
+            </div>
+        </div>
+
+        <!-- Occupancy bar -->
+        <div class="bar-box">
+            <div class="bar-back">
+                <div class="bar-fill" id="bar"></div>
+            </div>
+        </div>
+
+        <p class="status-line">
+            <span id="sensor-status">● Sensors online (simulated)</span>
+            &nbsp;|&nbsp; Last update: <b id="last-update">--:--:--</b>
+            &nbsp;&nbsp;<button id="pause-button">Pause simulation</button>
+        </p>
+
+        <!-- 2. PARKING LOT -->
+        <div class="section-bar">
+            <h2>2. Parking lot</h2>
+        </div>
+
+        <p class="text">
+            Each rectangle is one parking space. Click on a space to change its status manually, like a sensor
+            that has just detected a car arriving or leaving.
+        </p>
+
+        <div class="legend">
+            <span class="legend-box available"></span> Available
+            &nbsp;&nbsp;&nbsp;
+            <span class="legend-box occupied"></span> Occupied
+        </div>
+
+        <!-- The JavaScript file draws all the spaces inside this box -->
+        <div class="lot-scroll">
+            <div class="lot" id="lot"></div>
+        </div>
+
+        <!-- 3. REFERENCE -->
+        <div class="section-bar">
+            <h2>3. Reference photo</h2>
+        </div>
+
+        <p class="text">
+            This is the real parking lot that inspired the project. My plan keeps its main idea: four blocks of
+            back-to-back parking spaces with one-way lanes between them.
+        </p>
+
+        <div align="center">
+            <img src="images/recurso1.png" alt="Satellite view of the Tec de Monterrey parking lot in Querétaro" class="photo">
+            <p class="caption">Parking lot of Tec de Monterrey, Campus Querétaro (satellite view).</p>
+        </div>
+
+        <!-- 4. HOW IT WORKS -->
+        <div class="section-bar">
+            <h2>4. How it works</h2>
+        </div>
+
+        <table class="info-table">
+            <tr>
+                <td class="info-title">Parking spaces</td>
+                <td>144 spaces: 4 blocks (A to D), 2 sides each (L and R), 18 spaces per side.</td>
+            </tr>
+            <tr>
+                <td class="info-title">Simulated sensors</td>
+                <td>When the page opens, each space gets a random status (about 60% occupied).</td>
+            </tr>
+            <tr>
+                <td class="info-title">Automatic updates</td>
+                <td>Every 2 seconds, between 1 and 3 cars arrive or leave. Over time the lot slowly fills up and empties, like during a school day.</td>
+            </tr>
+            <tr>
+                <td class="info-title">Manual changes</td>
+                <td>Click on any space to change its status. The dashboard updates immediately.</td>
+            </tr>
+            <tr>
+                <td class="info-title">Dashboard</td>
+                <td>Total, occupied, available, percentage and a bar that changes color (green, orange, red) as the lot gets full.</td>
+            </tr>
+            <tr>
+                <td class="info-title">Tools</td>
+                <td>HTML for the structure, CSS for the design and JavaScript for the sensors, clicks and calculations.</td>
+            </tr>
+        </table>
+
+        <!-- Contact -->
+        <div class="contact">
+
+            <p>
+                My school:
+                <a href="https://www.tec.mx" target="_blank" rel="noopener noreferrer">Tecnológico de Monterrey</a>
+            </p>
+
+            <p>
+                Contact me on WhatsApp:
+                <a href="https://wa.me/4428245902?text=Holi" target="_blank" rel="noopener noreferrer">Say hello!</a>
+            </p>
+
+            <p>
+                Send me an email:
+                <a href="mailto:A01715095@tec.mx">A01715095@tec.mx</a>
+            </p>
+
+            <p>
+                <a href="../../../index.html" class="back-bold">← Back to my main page</a>
+            </p>
+
+        </div>
+
+        <center class="to-top">
+            <a href="#top">GO TO TOP</a>
+        </center>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Abril Odette Jiménez Sánchez</p>
+        <p class="footer-small">Lab 03 · TC1004B · Implementation of the Internet of Things</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

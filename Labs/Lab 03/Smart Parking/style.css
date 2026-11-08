@@ -1,0 +1,344 @@
+/* ---------- General ---------- */
+body {
+    margin: 0;
+    background-color: #ffffff;
+    color: #1b2a38;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 22px;
+}
+
+/* ---------- Top bar and cover ---------- */
+.topbar {
+    background-color: #0b2c4a;
+    color: white;
+    padding: 14px 30px;
+}
+
+.topbar-text {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.back-link {
+    color: #7fe3ef;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.cover {
+    background-color: #06203a;
+    color: white;
+    padding: 50px 40px;
+}
+
+.cover-label {
+    font-size: 14px;
+    letter-spacing: 4px;
+    color: #7fe3ef;
+    margin: 0 0 12px 0;
+}
+
+.cover h1 {
+    font-size: 60px;
+    margin: 0 0 12px 0;
+}
+
+.cover-sub {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 14px;
+}
+
+.cover-text {
+    font-size: 15px;
+    color: #cfeff5;
+    max-width: 560px;
+    line-height: 1.7;
+}
+
+/* ---------- Section titles ---------- */
+.section-bar {
+    background-color: #0b2c4a;
+    padding: 14px 24px;
+    margin-top: 40px;
+}
+
+.section-bar h2 {
+    margin: 0;
+    font-size: 34px;
+    color: white;
+}
+
+.text {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-top: 22px;
+}
+
+/* ---------- Dashboard ---------- */
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 22px;
+}
+
+.card {
+    flex: 1;
+    min-width: 180px;
+    border: 1px solid #b9c9d9;
+    border-top: 5px solid #0b2c4a;
+    border-radius: 8px;
+    padding: 14px 18px;
+    text-align: center;
+}
+
+.card-label {
+    margin: 0;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #4a5d70;
+}
+
+.card-number {
+    margin: 6px 0 0 0;
+    font-size: 48px;
+    font-weight: bold;
+    color: #0b2c4a;
+}
+
+.red {
+    color: #e5484d;
+}
+
+.green {
+    color: #1f9d5b;
+}
+
+/* Occupancy bar */
+.bar-box {
+    margin-top: 20px;
+}
+
+.bar-back {
+    background-color: #e3ebf3;
+    border-radius: 10px;
+    height: 22px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    width: 0%;
+    background-color: #2fbf71;
+    transition: width 0.6s, background-color 0.6s;
+}
+
+.bar-fill.orange {
+    background-color: #f2a43a;
+}
+
+.bar-fill.red-bar {
+    background-color: #e5484d;
+}
+
+.status-line {
+    font-size: 14px;
+    color: #4a5d70;
+    margin-top: 14px;
+}
+
+#pause-button {
+    background-color: #0b2c4a;
+    color: white;
+    border: 0;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+/* ---------- Legend ---------- */
+.legend {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.legend-box {
+    display: inline-block;
+    width: 18px;
+    height: 12px;
+    border-radius: 3px;
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+/* ---------- Parking lot ---------- */
+.lot-scroll {
+    overflow-x: auto;
+    margin-top: 16px;
+}
+
+.lot {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    background-color: #3b4350;
+    border-radius: 10px;
+    padding: 24px 16px;
+    min-width: 760px;
+}
+
+.block {
+    display: flex;
+    gap: 4px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+/* Lane between blocks, with arrows */
+.aisle {
+    width: 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    color: #aab4c0;
+    font-size: 22px;
+    border-left: 2px dashed #5b6573;
+    border-right: 2px dashed #5b6573;
+    margin: 0 8px;
+}
+
+/* Each parking space */
+.space {
+    width: 46px;
+    height: 22px;
+    border-radius: 3px;
+    font-size: 10px;
+    line-height: 22px;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+}
+
+.space:hover {
+    outline: 2px solid white;
+}
+
+.available,
+.legend-box.available {
+    background-color: #2fbf71;
+}
+
+.occupied,
+.legend-box.occupied {
+    background-color: #e5484d;
+}
+
+/* Short flash when a sensor changes */
+.flash {
+    animation: flash 0.7s;
+}
+
+@keyframes flash {
+    0% {
+        box-shadow: 0 0 0 0 white;
+        transform: scale(1.25);
+    }
+
+    100% {
+        box-shadow: 0 0 0 6px rgba(255, 255, 255, 0);
+        transform: scale(1);
+    }
+}
+
+/* ---------- Reference photo ---------- */
+.photo {
+    width: 100%;
+    max-width: 760px;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.caption {
+    font-size: 13px;
+    color: #4a5d70;
+    font-style: italic;
+}
+
+/* ---------- Info table ---------- */
+.info-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 22px;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.info-table td {
+    padding: 10px 14px;
+    border: 1px solid #b9c9d9;
+}
+
+.info-table td.info-title {
+    background-color: #0b2c4a;
+    color: white;
+    font-weight: bold;
+    border: 1px solid #0b2c4a;
+    width: 25%;
+}
+
+/* ---------- Contact and footer ---------- */
+.contact {
+    border-top: 4px solid #0b2c4a;
+    margin-top: 40px;
+    padding-top: 22px;
+    font-size: 15px;
+}
+
+.contact a {
+    color: #1f6fb2;
+}
+
+.back-bold {
+    font-weight: bold;
+}
+
+.to-top {
+    margin: 25px 0 40px 0;
+}
+
+.to-top a {
+    color: #1f6fb2;
+    font-size: 14px;
+}
+
+footer {
+    background-color: #0b2c4a;
+    color: white;
+    padding: 24px 20px;
+    text-align: center;
+    font-size: 14px;
+}
+
+footer p {
+    margin: 0 0 8px 0;
+}
+
+footer .footer-small {
+    font-size: 12px;
+    color: #b8d3e6;
+    margin: 0;
+}
