@@ -1,7 +1,10 @@
 // ---------- 1. Settings ----------
-var blocks = ["A", "B", "C", "D"];   // four blocks, like the photo
-var spacesPerColumn = 18;            // each block has two columns (L and R)
-var updateTime = 2000;               // the sensors update every 2 seconds (in milliseconds)
+// Center blocks: [letter, spaces per side]. Each block has two columns (L and R).
+var centerBlocks = [["A", 18], ["B", 17], ["C", 17], ["D", 16], ["E", 15]];
+var topCount = 15;                   // single row on the top
+var leftCount = 21;                  // single column on the left
+var bottomCount = 13;                // single row on the bottom (first and last are accessible spaces)
+var updateTime = 4000;               // the sensors update every 4 seconds (in milliseconds)
 
 var spaces = [];                     // list with all the parking spaces
 var paused = false;
@@ -12,35 +15,74 @@ var startTime = Date.now();
 function createParkingLot() {
     var lot = document.getElementById("lot");
 
-    for (var b = 0; b < blocks.length; b++) {
+    lot.appendChild(createStrip("strip-left", "W", leftCount, false));
+    lot.appendChild(createStrip("strip-top", "T", topCount, false));
+    lot.appendChild(createLane("lane1", "←"));
+    lot.appendChild(createCenter());
+    lot.appendChild(createLane("lane2", "→"));
+    lot.appendChild(createStrip("strip-bottom", "S", bottomCount, true));
+}
 
-        // A lane with arrows before every block
-        lot.appendChild(createAisle(b));
+// A single line of spaces (left, top or bottom)
+function createStrip(className, prefix, count, accessibleEnds) {
+    var strip = document.createElement("div");
+    strip.className = "strip " + className;
+
+    for (var n = 1; n <= count; n++) {
+        var accessible = accessibleEnds && (n === 1 || n === count);
+        var space = createSpace(prefix + "-" + n, n, accessible);
+        strip.appendChild(space.element);
+    }
+    return strip;
+}
+
+// The five blocks in the center, with a lane between them
+function createCenter() {
+    var row = document.createElement("div");
+    row.className = "center-row";
+
+    for (var b = 0; b < centerBlocks.length; b++) {
+        var letter = centerBlocks[b][0];
+        var count = centerBlocks[b][1];
+
+        row.appendChild(createAisle(b));
 
         var block = document.createElement("div");
         block.className = "block";
 
         var sides = ["L", "R"];
         for (var s = 0; s < sides.length; s++) {
-
             var column = document.createElement("div");
             column.className = "column";
 
-            for (var n = 1; n <= spacesPerColumn; n++) {
-                var space = createSpace(blocks[b] + "-" + sides[s] + n);
+            for (var n = 1; n <= count; n++) {
+                var space = createSpace(letter + "-" + sides[s] + n, n, false);
                 column.appendChild(space.element);
             }
-
             block.appendChild(column);
         }
-
-        lot.appendChild(block);
+        row.appendChild(block);
     }
 
     // One last lane at the end
-    lot.appendChild(createAisle(blocks.length));
+    row.appendChild(createAisle(centerBlocks.length));
+    return row;
 }
 
+// Horizontal lane with arrows (between the strips and the blocks)
+function createLane(className, arrow) {
+    var lane = document.createElement("div");
+    lane.className = "lane " + className;
+
+    for (var i = 0; i < 8; i++) {
+        var span = document.createElement("span");
+        span.textContent = arrow;
+        lane.appendChild(span);
+    }
+    return lane;
+}
+
+// Vertical lane with arrows
 function createAisle(number) {
     var aisle = document.createElement("div");
     aisle.className = "aisle";
@@ -55,15 +97,15 @@ function createAisle(number) {
     return aisle;
 }
 
-function createSpace(id) {
+function createSpace(id, number, accessible) {
     var element = document.createElement("div");
-    element.className = "space";
-    element.textContent = id.split("-")[1].substring(1);   // shows only the number
+    element.textContent = accessible ? "♿" : number;
 
     // Simulated sensor: random status when the page opens (about 60% occupied)
     var space = {
         id: id,
         status: (Math.random() < 0.6) ? "occupied" : "available",
+        extra: accessible ? " accessible" : "",
         element: element
     };
 
@@ -87,7 +129,7 @@ function setStatus(space, newStatus) {
 }
 
 function showStatus(space, flash) {
-    space.element.className = "space " + space.status;
+    space.element.className = "space " + space.status + space.extra;
     space.element.title = space.id + " - " + (space.status === "occupied" ? "Occupied" : "Available");
 
     // Small flash so the change is easy to notice
