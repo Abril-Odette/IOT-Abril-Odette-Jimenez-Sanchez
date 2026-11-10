@@ -186,18 +186,75 @@ body {
 }
 
 .lot {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-areas:
+        "left top"
+        "left lane1"
+        "left center"
+        "left lane2"
+        ".    bottom";
+    column-gap: 22px;
     justify-content: center;
-    gap: 0;
     background-color: #3b4350;
     border-radius: 10px;
     padding: 24px 16px;
-    min-width: 760px;
+    min-width: 860px;
+}
+
+/* Single lines of spaces: left, top and bottom */
+.strip {
+    display: flex;
+    gap: 3px;
+}
+
+.strip-left {
+    grid-area: left;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.strip-top {
+    grid-area: top;
+    justify-self: center;
+}
+
+.strip-bottom {
+    grid-area: bottom;
+    justify-self: center;
+}
+
+/* Horizontal lanes with arrows */
+.lane {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 20px;
+    margin: 4px 0;
+    color: #aab4c0;
+    font-size: 16px;
+    border-top: 2px dashed #5b6573;
+    border-bottom: 2px dashed #5b6573;
+}
+
+.lane1 {
+    grid-area: lane1;
+}
+
+.lane2 {
+    grid-area: lane2;
+}
+
+/* Center blocks */
+.center-row {
+    grid-area: center;
+    display: flex;
+    justify-content: center;
 }
 
 .block {
     display: flex;
-    gap: 4px;
+    gap: 3px;
 }
 
 .column {
@@ -206,23 +263,23 @@ body {
     gap: 3px;
 }
 
-/* Lane between blocks, with arrows */
+/* Vertical lane between blocks, with arrows */
 .aisle {
-    width: 56px;
+    width: 36px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     color: #aab4c0;
-    font-size: 22px;
+    font-size: 20px;
     border-left: 2px dashed #5b6573;
     border-right: 2px dashed #5b6573;
-    margin: 0 8px;
+    margin: 0 4px;
 }
 
 /* Each parking space */
 .space {
-    width: 46px;
+    width: 42px;
     height: 22px;
     border-radius: 3px;
     font-size: 10px;
@@ -244,6 +301,20 @@ body {
 .occupied,
 .legend-box.occupied {
     background-color: #e5484d;
+}
+
+/* Accessible spaces (blue border) */
+.space.accessible {
+    border: 2px solid #2f8fe6;
+    box-sizing: border-box;
+    line-height: 18px;
+    font-size: 12px;
+}
+
+.legend-box.accessible {
+    background-color: #ffffff;
+    border: 3px solid #2f8fe6;
+    box-sizing: border-box;
 }
 
 /* Short flash when a sensor changes */
