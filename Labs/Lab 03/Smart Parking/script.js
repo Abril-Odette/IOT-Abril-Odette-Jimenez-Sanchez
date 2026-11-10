@@ -1,4 +1,4 @@
-// ---------- 1. Settings ----------
+// ---------- 1. Settings --------
 // Center blocks: [letter, spaces per side]. Each block has two columns (L and R).
 var centerBlocks = [["A", 18], ["B", 17], ["C", 17], ["D", 16], ["E", 15]];
 var topCount = 15;                   // single row on the top
